@@ -9,6 +9,7 @@ function db_store($owner, $contact) {
 	foreach( $contact as $field => $value)
 		$sql->add($field, $value);
 	$sql->run();
+	echo $sql->debug();
 	echo $contact->first_name .' '. $contact->last_name .': Lagret!';
 }
 
@@ -33,8 +34,13 @@ function do_xml( $contact ) {
 	global $PHONE_TYPES, $PHONE_LABELS,$PHONE_SUFFIX;
 	
 	foreach( $PHONE_TYPES as $type ) {
+		// Skip all empty phone numbers
 		if(empty( $contact['phone_'.$type] ))
 			continue;
+		// Skip all phones with suffix
+		if( strpos($contact['phone_'.$type], '#') !== false)
+			continue;
+			
 		foreach($PHONE_SUFFIX as $suffix) {
 			$return .='
 			<item>

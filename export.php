@@ -18,7 +18,7 @@ $sql = new SQL("SELECT *
 				FROM `ukm_kontakter` 
 				WHERE `owner` = 'system'");
 $res = $sql->run();
-while( $r = mysql_fetch_assoc( $res ) ) {
+while( $r = SQL::fetch( $res ) ) {
 	$XML_system_data .= do_xml($r);
 }
 
@@ -29,7 +29,7 @@ foreach($OWNERS as $owner) {
 					WHERE `owner` = '#owner'",
 					array('owner' => $owner));
 	$res = $sql->run();
-	while( $r = mysql_fetch_assoc( $res ) ) {
+	while( $r = SQL::fetch( $res ) ) {
 		$XML_data .= do_xml($r);
 	}
 

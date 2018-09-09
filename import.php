@@ -76,7 +76,7 @@ $sql = new SQL("SELECT `c`.`id` AS `c_id`,
 			");
 $res = $sql->run();
 
-while($r = mysql_fetch_assoc( $res )) {
+while($r = SQL::fetch( $res )) {
 	if(empty($r['last_name']))
 		continue;	
 	foreach($r as $key => $val)
